@@ -25,7 +25,7 @@ class App extends React.Component {
 
 
     public render() {
-        const titleText = this.state.user ? `Welcome ${this.state.user.firstName}` : 'React Typescript Firebase Authentication'
+        const titleText = this.state.user ? `Welcome ${this.state.user.firstName}` : 'React Typescript Firebase Authentication';
         return (
             <div className="App">
                 <header className="App-header">
@@ -58,7 +58,7 @@ class App extends React.Component {
     };
 
     private handleGoogleLogout = () => {
-        // sd
+        // call provider authentication logout
     };
 }
 
