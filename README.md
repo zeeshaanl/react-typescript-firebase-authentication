@@ -1,0 +1,1 @@
+A boilerplate for adding firebase authentication to a react app in typescript.
