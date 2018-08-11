@@ -32,13 +32,31 @@ export default class FirebaseProviderAuthentication implements IAuthentication {
             const result: IAuthResult = await this.firebase.auth().signInWithPopup(this.providerMap[provider]);
             const user: IAuthUser = result.user;
             const splitName = user.displayName.split(' ');
-            return new User(splitName[0], splitName[1], user.email);
+            return new User(user.uid, splitName[0], splitName[1], user.email);
         } catch (error) {
             throw(error);
         }
     };
 
+    public createUser = async (provider: Providers): Promise<User> => {
+        return this.signIn(provider);
+    };
+
     public logOut = async (): Promise<object> => {
-        return {}
+        return await this.firebase.auth().signOut();
+    };
+
+    public checkIfUserIsLoggedIn = async (userLoggedInHandler: (user: User | null) => void) => {
+        this.firebase.auth().onAuthStateChanged((firebaseUser: any) => {
+            if (!firebaseUser) {
+                userLoggedInHandler(firebaseUser);
+            } else {
+                const firebaseAuthUser: IAuthUser = firebaseUser;
+                const splitName = firebaseAuthUser.displayName.split(' ');
+                const uid: string = firebaseAuthUser.uid;
+                const user = new User(uid, splitName[0], splitName[1], firebaseUser.email);
+                userLoggedInHandler(user);
+            }
+        });
     };
 }
