@@ -43,7 +43,11 @@ export default class FirebaseProviderAuthentication implements IAuthentication {
     };
 
     public logOut = async (): Promise<object> => {
-        return await this.firebase.auth().signOut();
+        try {
+            return await this.firebase.auth().signOut();
+        } catch(error) {
+            throw error
+        }
     };
 
     public checkIfUserIsLoggedIn = async (userLoggedInHandler: (user: User | null) => void) => {
