@@ -1,9 +1,10 @@
 {
-  "name": "couplesee-frontend",
+  "name": "react-typescript-firebase-authentication",
+  "description": "A boilerplate for quick setup of a typescript react app with authentication using firebase",
+  "author": "Zeeshaan Lakdawala",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/firebase": "^3.2.1",
     "bootstrap": "3",
     "firebase": "^5.3.1",
     "react": "^16.4.2",
